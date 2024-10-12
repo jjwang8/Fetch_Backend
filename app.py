@@ -8,9 +8,9 @@ app = Flask(__name__)
 #transactions and balance for the payer
 history = [] #transaction history priority_queue to efficiently grab latest payment
 balances = defaultdict(int) #balance of the payers, defaultdict because if payer's points are used up we will want to show name and points
-total = 0 #total balance
+total = 0 #total balance, instead of iterating over all of balances each time
 
-#indexes into the tuple for history
+#indexes into the tuple for history (of payments)
 TIMESTAMP = 0
 POINTS = 1
 PAYER = 2
@@ -55,6 +55,7 @@ def spend_points():
                 heapq.heappush(history, i)
             ReAdd.clear()
 
+        #Grabs the next oldest payment and info from it
         item = heapq.heappop(history)
         payer, points = item[PAYER], item[POINTS]
 
