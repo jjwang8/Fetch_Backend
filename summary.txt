@@ -1,0 +1,33 @@
+1. Why did you choose the tools, libraries, and language you used for the coding exercise?
+
+I chose Python and Flask because these are the tools I am most familiar with, and they provide a simple and quick way of building a project like this. 
+Flask, being a lightweight framework, allows me to rapidly set up and build RESTful APIs with minimal configuration. 
+Python, with its clean syntax and ease of use, makes it ideal for quickly prototyping and building a solution like this. 
+Additionally, Flask's simplicity helps in making the project flexible and easy to modify if needed, and the large community and ecosystem around Python provide many resources and libraries to help overcome any potential challenges.
+
+2. What are the advantages and disadvantages of your solution?
+
+Advantages:
+- I used a priority queue to manage the point transactions, allowing for efficient insertion and removal of the oldest transactions based on the timestamp, rather than using Python's sorted() function, which recalculates the sort each time. 
+This improves efficiency, especially when handling many transactions.
+- The combination of Flask and Python makes the project easy to set up and modify, meaning changes can be quickly implemented with minimal overhead. 
+Flask's flexibility allows me to focus on the core functionality without dealing with unnecessary complexities.
+- Python has a simple syntax, and Flask's structure makes it straightforward to write tests and handle edge cases. 
+The solution can also be easily tested with Python scripts like the one I created (test.py) for automated testing.
+
+Disadvantages:
+- Python's single-threaded nature and Flask's simplicity could present scalability issues if the application needed to handle a large number of simultaneous requests. 
+For a larger, production-level application with many users, a more scalable framework or language might be needed.
+- The current implementation stores all transactions and balances in memory, which limits the solution's ability to persist data across restarts. 
+If the server goes down or is restarted, all the data would be lost unless persistent storage (like a database) is implemented.
+-  Since Flask is not asynchronous by default, concurrent transactions from multiple users could lead to potential data inconsistency if not carefully managed.
+
+3. What has been a favorite school/personal project thus far? What about it that challenged you?
+
+One of my favorite projects has been Checkify, a fully automatic fact-checking system that I built to help address the growing misinformation crisis. 
+The project involved deploying a Chrome extension that extracts and verifies on-screen text in real time. 
+I utilized multiple technologies such as Hugging Face, Pinecone, MongoDB, SerpApi, and OpenAI to develop this system.
+
+The biggest challenge I faced during this project was learning and integrating several new tools and libraries, such as creating a caching system using vector databases like Pinecone, building custom embedding models, and designing a versatile AI agent framework. 
+Additionally, I had to ensure the system performed efficiently while parsing and verifying website data accurately, which required me to adapt quickly to new technologies and approaches. 
+Despite these challenges, I was able to achieve state-of-the-art results (87% accuracy) on the LIAR dataset, which benchmarks AI fact-checking systems.
