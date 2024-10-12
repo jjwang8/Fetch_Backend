@@ -90,7 +90,7 @@ def spend_points():
     for i in ReAdd: #Re-adds any payments if needed
         heapq.heappush(history, i)
 
-    list_json = [{k: v} for k, v in result.items() if v != 0]
+    list_json = [{k: v} for k, v in result.items() if v != 0] #forts the dictionary into a list form for proper output
     return jsonify(list_json), 200
 
 @app.route('/balance', methods=['GET'])
