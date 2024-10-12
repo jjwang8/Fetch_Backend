@@ -47,8 +47,14 @@ def spend_points():
     
     #Main loop to retrieve the oldest payment first
     result = {} #result stored in dict first to track net changes
+    ReAdd = [] #Re-adds payments after all payments are checked, case where only part of an beginning payment is used, prevent infinite loop
     while req_points > 0:
         #Grab the oldest payment
+        if len(history) == 0: #If all payments have been checked but there are past ones still positive, then use them.
+            for i in ReAdd:
+                heapq.heappush(history, i)
+            ReAdd.clear()
+
         item = heapq.heappop(history)
         payer, points = item[PAYER], item[POINTS]
 
@@ -69,13 +75,20 @@ def spend_points():
             balances[payer] -= points
             total -= points
             result[payer] = result.get(payer, 0) - points #update the response
+            if item[POINTS] > points: #The case where line 65 happened, ie negative future payment and preventing from going negative
+                item[POINTS] -= points
+                ReAdd.append(item) #re-add the edited payment
         else:
             item[POINTS] -= req_points #inplace update of the oldest payment
             balances[payer] -= req_points
             total -= req_points
             result[payer] = result.get(payer, 0) - req_points
             req_points = 0 #just to end loop and for last json row
+            ReAdd.append(item)
     
+    for i in ReAdd: #Re-adds any payments if needed
+        heapq.heappush(history, i)
+
     list_json = [{k: v} for k, v in result.items() if v != 0]
     return jsonify(list_json), 200
 
