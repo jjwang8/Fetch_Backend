@@ -96,7 +96,7 @@ To make testing easier, you can run the `test.py` script, which automates the pr
 2. In another terminal, run the `test.py` script:
 
    ```bash
-   python test_api.py
+   python test.py
    ```
 3. The output should look like this:
 
