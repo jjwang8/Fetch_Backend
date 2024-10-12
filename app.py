@@ -59,7 +59,10 @@ def spend_points():
         item = heapq.heappop(history)
         payer, points = item[PAYER], item[POINTS]
 
-        if points < 0: #add the negative balance to the current 
+        if balances[payer] < 0: #ignore but keep payments where the payer is in debt to prevent points from transferring across payers
+            ReAdd.append(item)
+            continue
+        elif points < 0: #add the negative balance to the current 
             req_points -= points
             balances[payer] -= points
             total -= points
